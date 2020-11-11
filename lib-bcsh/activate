@@ -60,3 +60,7 @@ __bcsh_source_all () {
 }
 
 __bcsh_source_all ${DOTBCSH}/lib-bcsh
+
+bcsh () {
+  __bcsh_$*
+}
