@@ -1,5 +1,17 @@
 #!/bin/sh
 
+__bcsh_backup () {
+    # rename an old file to prepare for a new
+    local old=${1}              # this is the file we want to copy
+    [ -z ${old} ] && return 1   # a path to the file must be given
+    [ -e ${old} ] || return 0   # the file must exist
+    for ii in $(seq 1 1000); do # find a free name. 1000 tries should be enough!
+        new=${old}.backup.${ii}
+        [ -e ${new} ] || break
+    done
+    cp ${old} ${new}            # do the copy. If it overwrites .backup.1000, too bad!
+}
+
 __bcsh_source_all () {
     for f in $(ls -1 ${1}/[0-9]*); do 
         echo sourcing $f
