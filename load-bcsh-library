@@ -49,14 +49,14 @@ END_DOCUMENTATION
 # The files will be sourced *in that order*.
 # to insure the automatic
 ############################################################
-
 __bcsh_source_all () {
+    _last () { echo $(basename $(dirname $1))/$(basename $1); }
     printf 'sourcing: '
     for f in $(ls -1 ${1}/[0-9][0-9][0-9]*); do 
-      >&2 printf "[$(basename $f)] "
+        >&2 printf "[$(_last $f)] "
         source $f
     done
     printf '\n'
 }
 
-__bcsh_source_all ${DOTBCSH}
+__bcsh_source_all ${DOTBCSH}/lib-bcsh
