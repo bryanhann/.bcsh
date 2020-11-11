@@ -1,4 +1,4 @@
 PATH+=:~/.local/bin
-source ${DOTBCSH}/load-bcsh-library
+source ${DOTBCSH}/lib-bcsh/activate
 __bcsh_deeper
 bash
