@@ -1,0 +1,25 @@
+#!/bin/sh
+
+__bcsh_source_all () {
+    for f in $(ls -1 ${1}/[0-9]*); do 
+        echo sourcing $f
+        #source $f
+    done
+}
+__bcsh_depth () {
+    echo $__DEPTH__
+}
+
+__bcsh_deeper () {
+    [ -z $__DEPTH__ ] && export __DEPTH__=-1
+    export __DEPTH__=$(( ${__DEPTH__} + 1 ))
+    echo YOU ARE ENTERING SHELL DEPTH ${__DEPTH__}
+}
+
+exit () {
+    [ ! "$(__bcsh_depth)" = "0" ] && echo YOU ARE LEAVING SHELL DEPTH $(__bcsh_depth)
+    [ ! "$(__bcsh_depth)" = "0" ] && builtin exit
+    echo YOU ARE ALREADY AT SHELL DEPTH $(__bcsh_depth)
+    echo to exit this shell invoke 'builtin exit'
+}
+
