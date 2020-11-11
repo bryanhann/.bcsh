@@ -50,7 +50,6 @@ END_DOCUMENTATION
 # to insure the automatic
 ############################################################
 bcsh_source_all () {
-    _last () { echo $(basename $(dirname $1))/$(basename $1); }
     printf "Loading from from $(basename $1):"
     for f in $(ls -1 ${1}/[0-9][0-9][0-9]*); do 
         >&2 printf " [$(basename $f)]"
@@ -68,4 +67,5 @@ bcsh_ () {
   compgen -A function | grep "bcsh_"
 }
 bcsh_source_all ${DOTBCSH}/lib-bcsh
-echo "FOR A LIST OF FUNCTIONS TYPE 'bcsh'."
+echo "For help type 'bcsh'."
+echo
