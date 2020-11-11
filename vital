@@ -3,7 +3,7 @@
 __bcsh_source_all () {
     for f in $(ls -1 ${1}/[0-9]*); do 
         echo sourcing $f
-        #source $f
+        source $f
     done
 }
 __bcsh_depth () {
