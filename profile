@@ -2,6 +2,6 @@ echo
 echo ++PROFILE
 PATH+=:~/.local/bin
 source ${DOTBCSH}/lib-bcsh/activate
-bcsh deeper
+bcsh deeper -v
 echo --PROFILE
 bash

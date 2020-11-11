@@ -7,13 +7,13 @@ bcsh_depth () {
 bcsh_deeper () {
     [ -z $__DEPTH__ ] && export __DEPTH__=-1
     export __DEPTH__=$(( ${__DEPTH__} + 1 ))
-    echo YOU ARE ENTERING SHELL DEPTH ${__DEPTH__}
+    [ "$1" == "-v" ] && echo depth is now ${__DEPTH__}
 }
 
 exit () {
-    [ ! "$(bcsh_depth)" = "0" ] && echo YOU ARE LEAVING SHELL DEPTH $(bcsh_depth)
+    [ ! "$(bcsh_depth)" = "0" ] && echo leaving depth $(bcsh_depth)
     [ ! "$(bcsh_depth)" = "0" ] && builtin exit
-    echo YOU ARE ALREADY AT SHELL DEPTH $(bcsh_depth)
+    echo cannot leave depth $(bcsh_depth)
     echo to exit this shell invoke 'builtin exit'
 }
 

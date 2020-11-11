@@ -68,4 +68,3 @@ bcsh_ () {
 }
 bcsh_source_all ${DOTBCSH}/lib-bcsh
 echo "For help type 'bcsh'."
-echo

@@ -1,5 +1,6 @@
 echo
 echo ++BASHRC
 source ${DOTBCSH}/lib-bcsh/activate
-bcsh deeper
+bcsh deeper -v
 echo --+BASHRC
+echo
