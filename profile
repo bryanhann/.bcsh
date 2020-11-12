@@ -1,7 +1,6 @@
 echo
 echo ++PROFILE
-PATH+=:~/.local/bin
-source ${BORG}/lib-borg/activate
-borg deeper -v
+echo "# nothing is done here. Instead, bashrc will call 'runonce'"
 echo --PROFILE
+echo
 bash

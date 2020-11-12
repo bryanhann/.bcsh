@@ -1,0 +1,11 @@
+#!/bin/sh
+[ -z ${BORG_FLAG_RUNONCE} ] && {
+    export BORG_FLAG_RUNONCE=1
+
+    >&2 echo "running 'runonce'"
+    PATH+=:~/.local/bin
+
+
+} || {
+    >&2 echo "skipping 'runonce'"
+}
