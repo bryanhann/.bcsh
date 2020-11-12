@@ -1,4 +1,4 @@
-bcsh_backup () {
+borg_backup () {
     # rename an old file to prepare for a new
     local old=${1}              # this is the file we want to copy
     [ -z ${old} ] && return 1   # a path to the file must be given
