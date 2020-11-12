@@ -1,6 +1,6 @@
 echo
 echo ++BASHRC
-source ${DOTBCSH}/lib-bcsh/activate
-bcsh deeper -v
+source ${BORG}/lib-borg/activate
+borg deeper -v
 echo --+BASHRC
 echo

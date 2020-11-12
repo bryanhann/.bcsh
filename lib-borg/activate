@@ -2,11 +2,11 @@
 cat >/dev/null<<END_DOCUMENTATION
 
 +-------------------------------------------+
-!  The  bcsh_* library of bash functions  !
+!  The  borg_* library of bash functions  !
 +-------------------------------------------+
 
 This is a library of function that all begin with the string 
-[bcsh_]. No function outside this library should be so 
+[borg_]. No function outside this library should be so 
 named. All functions of this library shall be available to
 scripts that are installing the full system. They are not
 meant to be used by scripts used after the full system is
@@ -26,7 +26,7 @@ file '500.foo' will be able to call functions defined in file
 '400.foo' but not functions defined in '600.foo'
 
 The only exception to this is the function defined herein 
-named 'bcsh_source_all' whose purpose is to source the
+named 'borg_source_all' whose purpose is to source the
 others.
 
 There is no need for the sourcer of this library to actually
@@ -49,7 +49,7 @@ END_DOCUMENTATION
 # The files will be sourced *in that order*.
 # to insure the automatic
 ############################################################
-bcsh_source_all () {
+borg_source_all () {
     printf "Loading from from $(basename $1):"
     for f in $(ls -1 ${1}/[0-9][0-9][0-9]*); do 
         >&2 printf " [$(basename $f)]"
@@ -59,12 +59,12 @@ bcsh_source_all () {
 }
 
 
-bcsh () {
-  bcsh_$*
+borg() {
+  borg_$*
 }
 
-bcsh_ () {
-  compgen -A function | grep "bcsh_"
+borg_ () {
+  compgen -A function | grep "borg_"
 }
-bcsh_source_all ${DOTBCSH}/lib-bcsh
-echo "For help type 'bcsh'."
+borg_source_all ${BORG}/lib-borg
+echo "For help type 'borg'."

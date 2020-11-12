@@ -1,19 +1,19 @@
 #!/bin/sh
 
-bcsh_depth () {
+borg_depth () {
     echo $__DEPTH__
 }
 
-bcsh_deeper () {
+borg_deeper () {
     [ -z $__DEPTH__ ] && export __DEPTH__=-1
     export __DEPTH__=$(( ${__DEPTH__} + 1 ))
     [ "$1" == "-v" ] && echo depth is now ${__DEPTH__}
 }
 
 exit () {
-    [ ! "$(bcsh_depth)" = "0" ] && echo leaving depth $(bcsh_depth)
-    [ ! "$(bcsh_depth)" = "0" ] && builtin exit
-    echo cannot leave depth $(bcsh_depth)
+    [ ! "$(borg_depth)" = "0" ] && echo leaving depth $(borg_depth)
+    [ ! "$(borg_depth)" = "0" ] && builtin exit
+    echo cannot leave depth $(borg_depth)
     echo to exit this shell invoke 'builtin exit'
 }
 

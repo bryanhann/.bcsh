@@ -1,7 +1,7 @@
 echo
 echo ++PROFILE
 PATH+=:~/.local/bin
-source ${DOTBCSH}/lib-bcsh/activate
-bcsh deeper -v
+source ${BORG}/lib-borg/activate
+borg deeper -v
 echo --PROFILE
 bash
