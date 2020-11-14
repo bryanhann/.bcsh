@@ -1,0 +1,16 @@
+#!/bin/bash
+
+_log () {
+    echo "~~[${FUNCNAME[1]}]" \# $*
+}
+_run () {
+    echo "~~[${FUNCNAME[1]}]" \$ $*
+    $*
+}
+
+_source () {
+	short=$(basename $(dirname $1))/$(basename $1)
+    _log $short
+    source $*
+}
+

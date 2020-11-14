@@ -1,10 +1,14 @@
-echo
-echo ++BASHRC
+source $BORG/first
+bmain () {
+	echo
+	_log echo ++BASHRC
 
-source ${BORG}/lib-borg/activate
-source ${BORG}/runonce
+	source ${BORG}/lib-borg/activate
+	source ${BORG}/runonce
 
-borg deeper -v
+	_run borg deeper -v
+	_log --BASHRC
+	echo
+}
 
-echo --+BASHRC
-echo
+bmain
