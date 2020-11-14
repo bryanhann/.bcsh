@@ -50,21 +50,14 @@ END_DOCUMENTATION
 # to insure the automatic
 ############################################################
 borg_source_all () {
-    printf "Loading from from $(basename $1):"
+#    printf "Loading from from $(basename $1):"
     for f in $(ls -1 ${1}/[0-9][0-9][0-9]*); do 
-        >&2 printf " [$(basename $f)]"
-        source $f
+ #       >&2 printf " [$(basename $f)]"
+        _source $f
     done
-    printf ".\n"
+  #  printf ".\n"
 }
 
 
-borg() {
-  borg_$*
-}
-
-borg_ () {
-  compgen -A function | grep "borg_"
-}
 borg_source_all ${BORG}/lib-borg
-echo "For help type 'borg'."
+_log "For help type 'borg'."

@@ -1,6 +1,4 @@
-echo
-echo ++PROFILE
-echo "# nothing is done here. Instead, bashrc will call 'runonce'"
-echo --PROFILE
-echo
-bash
+source $BORG/first
+_log ++profile
+_log nothing is done here
+_log --profile

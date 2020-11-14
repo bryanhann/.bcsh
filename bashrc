@@ -1,14 +1,13 @@
 source $BORG/first
+borg() { borg_$* ; }
+borg_ () { compgen -A function | grep "borg_" ; }
+	
 bmain () {
-	echo
-	_log echo ++BASHRC
-
-	source ${BORG}/lib-borg/activate
-	source ${BORG}/runonce
-
-	_run borg deeper -v
-	_log --BASHRC
-	echo
+  _log  ++BASHRC
+  _source_all ${BORG}/lib-borg
+  _source_once ${BORG}/runonce
+  _run borg deeper -v
+  _log --BASHRC
 }
 
 bmain

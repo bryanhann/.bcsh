@@ -8,9 +8,28 @@ _run () {
     $*
 }
 
-_source () {
-	short=$(basename $(dirname $1))/$(basename $1)
-    _log $short
-    source $*
+_short () {
+echo $(basename $(dirname $1))/$(basename $1)
 }
 
+_source () {
+#short=$(basename $(dirname $1))/$(basename $1)
+_log $(_short $1)
+source $*
+}
+
+_source_all () {
+    for f in $(ls -1 ${1}/[0-9][0-9][0-9]*); do 
+        _source $f
+    done
+}
+
+_source_once () {
+  [ -z ${BORG_FLAG_RUNONCE} ] && {
+    export BORG_FLAG_RUNONCE=1
+    _log running: $(_short $1)
+    _source $1
+  } || {
+    _log skipping: $(_short $1)
+  } 
+} 
