@@ -1,27 +1,39 @@
 #!/bin/bash
 
-_log () {
-    echo "~~[${FUNCNAME[1]}]" \# $*
+_banner () {
+    banner=">>>>>>>>>>>>>>>>[$1]"
+    #delay=$3
+    [ -z "${delay}" ] && delay=0
+    printf "${banner} "
+    for ii in 3 2 1; do
+        printf "."
+        [ -z $3 ] || sleep $3
+    done
+    printf "$2\n"
 }
+
+_log () {
+  echo "~~[${FUNCNAME[1]}]" \# $*
+}
+
 _run () {
-    echo "~~[${FUNCNAME[1]}]" \$ $*
-    $*
+  echo "~~[${FUNCNAME[1]}]" \$ $*
+  $*
 }
 
 _short () {
-echo $(basename $(dirname $1))/$(basename $1)
+  echo $(basename $(dirname $1))/$(basename $1)
 }
 
 _source () {
-#short=$(basename $(dirname $1))/$(basename $1)
-_log $(_short $1)
-source $*
+  _log $(_short $1)
+  source $*
 }
 
 _source_all () {
-    for f in $(ls -1 ${1}/[0-9][0-9][0-9]*); do 
-        _source $f
-    done
+  for f in $(ls -1 ${1}/[0-9][0-9][0-9]*); do
+    _source $f
+  done
 }
 
 _source_once () {
@@ -31,5 +43,5 @@ _source_once () {
     _source $1
   } || {
     _log skipping: $(_short $1)
-  } 
-} 
+  }
+}
