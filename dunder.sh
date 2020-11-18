@@ -1,10 +1,11 @@
 #!/bin/bash
+#_borg () { compgen -A function | grep "borg_" ; }
 
-_export () {
-  export $1=$2
+__export__ () {
+    export $1=$2
 }
 
-_trace () {
+__trace__ () {
     local acc=
     local part=
     for ii in $(seq $1 $2); do
@@ -16,7 +17,7 @@ _trace () {
     echo ">>$acc"
 }
 
-_github () {
+__github__ () {
     local src=http://github.com/$1
     local dst=${BORG}/.repo/github/$1
     [ -d ${dst} ] || git clone $src $dst 2> /dev/null > /dev/null
@@ -25,7 +26,7 @@ _github () {
     return 1
 }
 
-_banner () {
+__banner__ () {
     banner=">>>>>>>>>>>>>>>>[$1]"
     #delay=$3
     [ -z "${delay}" ] && delay=0
@@ -37,21 +38,21 @@ _banner () {
     printf "$2\n"
 }
 
-_log () {
-  echo "$(_trace 1 8 --ignore-source)" $*
+__log__ () {
+  echo "$(__trace__ 1 8 --ignore-source)" $*
 }
 
-_run () {
-  echo $(_trace 1 8 --ignore-source) $*
+__run__ () {
+  echo $(__trace__ 1 8 --ignore-source) $*
   $*
 }
 
-_short () {
+__short__ () {
   echo $(basename $(dirname $1))/$(basename $1)
 }
 
-_source_all () {
+__src__ () {
   for f in $(ls -1 ${1}/[0-9][0-9][0-9]*); do
-    _run source $f
+    __run__ source $f
   done
 }
