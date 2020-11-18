@@ -1,12 +1,15 @@
 borg_backup () {
     # rename an old file to prepare for a new
     local old=${1}              # this is the file we want to copy
-    [ -z ${old} ] && return 1   # a path to the file must be given
-    [ -e ${old} ] || return 1   # the file must exist
+    [ -z ${old} ] && return 0   # no path given? Nothing to backup!
+    [ -e ${old} ] || return 0   # nothing at path? Nothing to backup!
     for ii in $(seq 1 1000); do # find a free name. 1000 tries should be enough!
         new=${old}.{backup#${ii}}
-        [ -e ${new} ] || break
+        [ -e ${new} ] && continue
+        # do the copy. If it overwrites .backup.1000, too bad!
+        __run__ cp ${old} ${new}
+        return 0
     done
-    cp ${old} ${new}            # do the copy. If it overwrites .backup.1000, too bad!
-    return 0
+    __log__ could not backup!
+    return 1
 }
