@@ -1,5 +1,14 @@
 #!/bin/bash
 
+_github () {
+    local src=http://github.com/$1
+    local dst=${BORG}/.repo/github/$1
+    [ -d ${dst} ] || git clone $src $dst 2> /dev/null > /dev/null
+    [ -d ${dst} ] && echo ${dst}
+    [ -d ${dst} ] && return 0
+    return 1
+}
+
 _banner () {
     banner=">>>>>>>>>>>>>>>>[$1]"
     #delay=$3
