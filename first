@@ -1,5 +1,8 @@
 #!/bin/bash
 
+_export () {
+  export $1=$2
+}
 
 _trace () {
     local acc=
