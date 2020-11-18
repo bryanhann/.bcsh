@@ -1,5 +1,18 @@
 #!/bin/bash
 
+
+_trace () {
+    local acc=
+    local part=
+    for ii in $(seq $1 $2); do
+        part=${FUNCNAME[${ii}]}
+        [ -z "${part}" ] && break
+        [ "${part}" = "source" ] && [ "$3" = "--ignore-source" ] && break
+        acc="[${part}]>>$acc"
+    done
+    echo ">>$acc"
+}
+
 _github () {
     local src=http://github.com/$1
     local dst=${BORG}/.repo/github/$1
@@ -22,11 +35,11 @@ _banner () {
 }
 
 _log () {
-  echo "~~[${FUNCNAME[1]}]" \# $*
+  echo "$(_trace 1 8 --ignore-source)" $*
 }
 
 _run () {
-  echo "~~[${FUNCNAME[1]}]" \$ $*
+  echo $(_trace 1 8 --ignore-source) $*
   $*
 }
 
