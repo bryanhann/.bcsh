@@ -1,0 +1,22 @@
+# These functions expect a path to a git repo as a first argument.
+
+borg_repo_test_validity () {
+    # is the first argument a (nonbare) git repository?
+    [ -z $1         ] && return 100
+    [ -d $1         ] || return 101
+    [ -d $1/.git    ] || return 1
+    [ true          ] && return 0
+}
+
+borg_repo_has_id () {
+    [ -z $2 ] && __log__ bad usage. missing second arg.
+    [ -z $2 ] && return 8
+    borg_repo_test_validity $1 || return $?
+    pushd $1 >/dev/null
+    git log | grep $2 > /dev/null
+    local ret=$?
+    popd >/dev/null
+    return ${ret}
+}
+
+
