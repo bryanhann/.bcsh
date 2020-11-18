@@ -1,0 +1,16 @@
+[ $0 = "./install" ] || echo "try './standalone'"
+[ $0 = "./install" ] && {
+    echo This will install the local BORG directory as your
+    echo startup shell files. It will overwrite your .profile
+    echo and .bashrc files. 
+    echo
+    echo Press ENTER to continue. Press Ctrl-C to quit.
+    echo
+    read
+    export BORG=$PWD
+    source $BORG/bashrc.sh
+    borg_install $BORG
+    echo
+    echo The new system will be used by future shells.
+    echo
+}
