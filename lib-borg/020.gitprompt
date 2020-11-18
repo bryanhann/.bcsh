@@ -1,0 +1,4 @@
+borg_gitprompt_install_monty () {
+    source $(_github magicmonty/bash-git-prompt)/gitprompt.sh
+}
+
