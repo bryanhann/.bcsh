@@ -1,8 +1,44 @@
 #!/bin/bash
-#_borg () { compgen -A function | grep "borg_" ; }
+
+__once__ () {
+    [ -z "${BORG_RPID}" ] || return 0
+    $*
+}
+
+__end_once__ () {
+    __once__ __run__ __export__ BORG_RPID $$
+}
+
+__path_append__() {
+   export PATH=${PATH}:$1
+}
 
 __export__ () {
     export $1=$2
+}
+
+__note__ () {
+  echo "$(__trace__ 1 8 --ignore-source)" $*
+}
+
+__log__ () {
+  echo "$(__trace__ 1 8 --ignore-source)" $*
+}
+
+__run__ () {
+  echo $(__trace__ 1 8 --ignore-source) $*
+  $*
+}
+
+__short__ () {
+  echo $(basename $(dirname $1))/$(basename $1)
+}
+
+__src__ () {
+  # source all numbered file is directory $1.
+  for f in $(ls -1 ${1}/[0-9][0-9][0-9]*); do
+    __run__ source $f
+  done
 }
 
 __trace__ () {
@@ -38,21 +74,3 @@ __banner__ () {
     printf "$2\n"
 }
 
-__log__ () {
-  echo "$(__trace__ 1 8 --ignore-source)" $*
-}
-
-__run__ () {
-  echo $(__trace__ 1 8 --ignore-source) $*
-  $*
-}
-
-__short__ () {
-  echo $(basename $(dirname $1))/$(basename $1)
-}
-
-__src__ () {
-  for f in $(ls -1 ${1}/[0-9][0-9][0-9]*); do
-    __run__ source $f
-  done
-}
