@@ -1,0 +1,3 @@
+# set prompt to monty
+__run__ borg_gitprompt_install_monty
+
