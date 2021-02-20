@@ -1,0 +1,8 @@
+#!/bin/bash
+#This shebang is for synax only. Do not make executable!
+
+addpath ${HOME}/.local/bin
+
+
+
+

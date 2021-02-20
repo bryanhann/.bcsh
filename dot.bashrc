@@ -1,12 +1,9 @@
+#!/bin/bash
+#This shebang is for synax only. Do not make executable!
 source ${BORG}/common.sh
-source ${BORG}/dot.bashrc.monty
-_bashrc_ () {
-    source ${BORG}/dunder.sh
-    __banner__ BORG/bashrc BEGIN 0.1
-    __src__ ${BORG}/lib-borg
-    __run__ borg_deeper -v
-    __end_once__
-    __banner__ BORG/bashrc END
-}
-
-_bashrc_
+source ${BORG}/module.depth
+source ${BORG}/module.poetry
+source ${BORG}/module.monty
+source ${BORG}/module.localbin
+source ${BORG}/module.bch
+source ${BORG}/module.bch0

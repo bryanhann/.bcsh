@@ -1,0 +1,17 @@
+#!/usr/env bash
+
+alias ls='ls -GF'
+alias l='ls -lGF'
+
+hide () {
+    local hole=./.hide
+    mkdir -p ${hole}
+    mv $* ${hole}
+}
+
+unhide () {
+    local hole=./.hide
+    mv ${hole}/$* .
+}
+
+

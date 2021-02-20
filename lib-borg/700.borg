@@ -1,4 +1,0 @@
-#!/bin/sh
-borg() { borg_$* ; }
-borg_ () { compgen -A function | grep "borg_" ; }
-
