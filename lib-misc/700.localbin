@@ -1,3 +1,0 @@
-# Add ./local/bin to path
-
-__once__ __run__ __path_append__ ${HOME}/.local/bin

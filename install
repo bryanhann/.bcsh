@@ -1,16 +1,25 @@
-[ $0 = "./install" ] || echo "try './standalone'"
-[ $0 = "./install" ] && {
-    echo This will install the local BORG directory as your
-    echo startup shell files. It will overwrite your .profile
-    echo and .bashrc files. 
-    echo
-    echo Press ENTER to continue. Press Ctrl-C to quit.
-    echo
-    read
-    export BORG=$PWD
-    source $BORG/bashrc.sh
-    borg_install $BORG
-    echo
-    echo The new system will be used by future shells.
-    echo
+export BORG=$PWD
+source ./common.sh
+
+# Install poetry to POETRY_HOME. 
+[ -d ${POETRY_HOME} ] || curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -
+
+
+DT=$(date "+%Y%m%dT%H%M%S")
+hide () {
+    mkdir -p ~/.hide
+    cp ${HOME}/${1} ${HOME}/.hide/${1}.${D}
 }
+hide .bashrc
+hide .profile
+
+cat > ~/.profile <<DOC
+export BORG=$BORG
+git clone https://github.com/bryanhann/dot.borg \$BORG 2> /dev/null
+source \$BORG/profile.sh
+DOC
+
+cat > ~/.bashrc <<BASHRC
+source \$BORG/bashrc.sh
+BASHRC
+
