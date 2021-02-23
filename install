@@ -9,7 +9,7 @@ git clone https://github.com/magicmonty/bash-git-prompt ${BORG_BUILD}/magicmonty
 hide () {
     mkdir -p ~/.hide
     DT=$(date "+%Y%m%dT%H%M%S")
-    cp ${HOME}/${1} ${HOME}/.hide/${1}.${D}
+    cp ${HOME}/${1} ${HOME}/.hide/${1}.${DT}
 }
 hide .bashrc
 hide .profile
