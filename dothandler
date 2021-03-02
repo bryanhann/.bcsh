@@ -1,4 +1,0 @@
-echo MYBORG: sourcing ${BORG}/dothandler $*
-#export BORG=${MYBORG}
-source ${BORG}/dotfiles/$*
-
