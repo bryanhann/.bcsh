@@ -1,0 +1,73 @@
+#########################################################################
+Tue  2 Mar 2021 21:37:27 HKT
+
+Revamped the installation and sourcing process, so that a user dotfile
+defers to a borg dotfile in a two step process rather than directly.
+
+RATIONALE and SYNOPSIS
+======================
+
+The location of the borg root folder is dynamic not static, faciliting side
+by side development of different borg installations. BEFORE: relevant user
+dotfiles (e.g. [~/.NAME]) sourced a dynamically changing target within the
+root of the borg installation. NOW: such dotfiles source the statically
+located target [~/.config/myborg/dothandle]. This target, in turn sources
+a dynamically located target in the borg root directory. 
+
+This is better because frequent changing of user dotfiles is errorprone,
+and reinstalling a borg typically required modification of many files. Now
+following an initial installation, and later installation requires updating
+precisely a single file -- [~/.config/myborg/current.txt] -- containing the
+path to the root of the current borg installation.
+
+
+DETAILS OF CHANGES
+==================
+
+Sourcing is done via two 'dothandler' scripts each named [dothander] because
+each is called with the name of a dotfile as a first argument.  The first is
+statically situated. The second is dynamically situated.  If we assume that
+the currently installed borg is rooted at[~/some/path/to/borg] then we can
+say that the dothandlers have the following fully qualified path names:
+
+    first dothandler: [~/.config/myborg/dothandler]
+    second dothandler: [~/some/path/to/borg/dothandler]
+
+Consider the dotfile [~/.profile]. It used to source a target in the root of
+a borg installation with a single line. It now sources the first dothandler
+with a single line. Note than it sources the dothandler with it's own name
+as an argument:
+
+    old: "source ~/dynamic/path/to/current/borg/dot.profile"
+    new: "source ~/.config/myborg/dothandler .profile"
+
+This first dothandler now sets the environment variable [$BORG] to the
+current borg root and uses this to source the second dothandler, again
+passing the name of the original dotfile (plus any additional arguments
+it may have received) with the two lines
+    "export BORG=$(cat ~/.config/myborg/current.txt)"
+    "source ${BORG}/dothandler $*"
+
+Note that these lines are literal, with special characters '$' and '*' 
+exactly as shown.
+
+The second dothandler then calls the appropriate borg proxy for the original
+dotfile without argument. The location of the proxy dotfiles have also changed:
+    old: [$BORG/dot.profile]
+    new: [$BORG/dotfiles/.profile]
+
+All these details apply, mutatis mutandis, to different dotfiles in the user's
+home. Eg the dotfile [~/.bashrc] sources the first dothandler (with argument),
+which sources the second dothandler (with argument), which sources the proxy
+[$BORG/dotfiles/.bashrc] (without argument).
+
+A NEW INSTALLATION SCRIPT
+=========================
+
+The script [./install] has been renamed to [./install.sh] and it does three
+four things:
+     1) create [~/.config/myborg] if needed
+     2) echo $PWD to ~/.config/myborg/current.txt
+     3) overwrite [~/.config/myborg/dothandler] in an idempotent way
+     4) copy dotfiles from [./files] to [~] writing backups to [~/.backups].
+
