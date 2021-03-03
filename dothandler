@@ -1,4 +1,20 @@
+#!/bin/bash
+#This shebang is for synax only. Do not make executable!
+
 echo MYBORG: sourcing ${BORG}/dothandler $*
-#export BORG=${MYBORG}
+
+[ -z "$BORG_INIT_ID" ] && {
+    export BORG_INIT_ID=$$
+    export BORG_INIT_DOTFILE=$1
+    export BORG_INIT_ARGS="$*"
+    export BORG_SHLVL=-1
+    exit () { echo TRY \'builtin exit\' ; }
+    set | grep ^BORG
+}
+
 source ${BORG}/dotfiles/$*
+
+trap "echo ENTER LEVEL $(( ${BORG_SHLVL} ))" 0
+export BORG_SHLVL=$(( ${BORG_SHLVL} + 1 ))
+echo ENTER LEVEL ${BORG_SHLVL}
 
