@@ -2,11 +2,15 @@
 #This shebang is for synax only. Do not make executable!
 
 export BORG=$(cat ~/.config/myborg/current.txt)
-echo MYBORG: sourcing ${BORG}/dothandler $*
 
-[ -z "$BORG_INIT" ] && echo . ${BORG}/init
-[ -z "$BORG_INIT" ] && . ${BORG}/init
+echo . ${BORG}/dothandler $*
 
+[ -z "$BORG_INIT" ] && {
+    echo . ${BORG}/init
+    source ${BORG}/init
+}
+
+echo . ${BORG}/dotfiles/$*
 source ${BORG}/dotfiles/$*
 
 trap "echo ENTER LEVEL $(( ${BORG_SHLVL} ))" 0
