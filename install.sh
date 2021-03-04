@@ -16,5 +16,5 @@ mycopy () {
 }
 
 for name in $(/bin/ls files); do mycopy $name; done
-mkdir -p    ${HOME}/.config/myborg
-echo $PWD > ${HOME}/.config/myborg/current.txt
+mkdir -p    ${HOME}/.local/var/myborg
+echo $PWD > ${HOME}/.local/var/myborg/current.txt
