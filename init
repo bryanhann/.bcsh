@@ -6,7 +6,6 @@
     export BORG_INIT_ID=$$
     export BORG_INIT_DOTFILE=$1
     export BORG_INIT_ARGS="$*"
-    export BORG_SHLVL=-1
     exit () { echo TRY \'builtin exit\' ; }
     set | grep ^BORG
 }

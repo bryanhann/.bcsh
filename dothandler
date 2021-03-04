@@ -13,7 +13,6 @@ echo . ${BORG}/dothandler $*
 echo . ${BORG}/dotfiles/$*
 source ${BORG}/dotfiles/$*
 
-trap "echo ENTER LEVEL $(( ${BORG_SHLVL} ))" 0
-export BORG_SHLVL=$(( ${BORG_SHLVL} + 1 ))
-echo ENTER LEVEL ${BORG_SHLVL}
+echo ENTER LEVEL $(( ${SHLVL} - 1 ))
+trap "echo ENTER LEVEL $(( ${SHLVL} - 2 ))" 0
 
