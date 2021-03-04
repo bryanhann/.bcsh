@@ -1,9 +1,12 @@
-_export __BH0__           ~/.bh0
-_export __BH0_ACC__       ${HOME}/.bh0.acc
-_export __BH0_RAW__       ${HOME}/.bh0.raw
-_export __BH0_LOCAL__     ${HOME}/.bh0.local
-_export __BH0_HTTP__      ${HOME}/.bh0.http
-_export __BH0_URL_GH__    https://github.com
-_export __BH0_DST_GH__    ${__BH0_HTTP__}/github.com
-_export __BH0_URL_BH__    ${__BH0_URL_GH__}/bryanhann
-_export __BH0_DST_BH__    ${__BH0_DST_GH__}/bryanhann
+#!/bin/bash
+#This shebang is for synax only. Do not make executable!
+
+borg_export __BH0__           ~/.bh0
+borg_export __BH0_ACC__       ${HOME}/.bh0.acc
+borg_export __BH0_RAW__       ${HOME}/.bh0.raw
+borg_export __BH0_LOCAL__     ${HOME}/.bh0.local
+borg_export __BH0_HTTP__      ${HOME}/.bh0.http
+borg_export __BH0_URL_GH__    https://github.com
+borg_export __BH0_DST_GH__    ${__BH0_HTTP__}/github.com
+borg_export __BH0_URL_BH__    ${__BH0_URL_GH__}/bryanhann
+borg_export __BH0_DST_BH__    ${__BH0_DST_GH__}/bryanhann
