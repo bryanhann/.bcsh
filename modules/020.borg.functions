@@ -5,11 +5,9 @@ borg_export () {
     echo borg_export $1 $2
     export $1=$2;
 }
-_borg_inpath () {
-    ${BORG}/notbin/inpath.py $*
-}
+
 borg_addpath () {
-    _borg_inpath $1 && return
+    ${BORG_SCRIPT_INPATH} $1 && return
     echo borg_addpath $1
     export PATH=$PATH:$1
 }

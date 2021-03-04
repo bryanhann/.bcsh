@@ -1,5 +1,9 @@
 #!/bin/bash
 #This shebang is for synax only. Do not make executable!
 
-export BORG_BUILD=${BORG}/.build
+_export () { export $1=$2; }
+
+_export BORG_BUILD          ${BORG}/.build
+_export BORG_SCRIPT_INPATH  ${BORG}/notbin/inpath.py
+
 mkdir -p ${BORG_BUILD}
