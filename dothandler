@@ -3,14 +3,8 @@
 
 echo MYBORG: sourcing ${BORG}/dothandler $*
 
-[ -z "$BORG_INIT_ID" ] && {
-    export BORG_INIT_ID=$$
-    export BORG_INIT_DOTFILE=$1
-    export BORG_INIT_ARGS="$*"
-    export BORG_SHLVL=-1
-    exit () { echo TRY \'builtin exit\' ; }
-    set | grep ^BORG
-}
+[ -z "$BORG_INIT" ] && echo . ${BORG}/init
+[ -z "$BORG_INIT" ] && . ${BORG}/init
 
 source ${BORG}/dotfiles/$*
 
