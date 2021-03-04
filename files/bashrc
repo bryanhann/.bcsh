@@ -1,1 +1,1 @@
-source ~/.config/myborg/dothandler .bashrc
+source $(cat ~/.config/myborg/current.txt)/dothandler .bashrc

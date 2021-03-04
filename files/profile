@@ -1,1 +1,1 @@
-source ~/.config/myborg/dothandler .profile
+source $(cat ~/.config/myborg/current.txt)/dothandler .profile

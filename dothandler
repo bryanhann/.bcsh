@@ -1,6 +1,7 @@
 #!/bin/bash
 #This shebang is for synax only. Do not make executable!
 
+export BORG=$(cat ~/.config/myborg/current.txt)
 echo MYBORG: sourcing ${BORG}/dothandler $*
 
 [ -z "$BORG_INIT" ] && echo . ${BORG}/init

@@ -16,11 +16,5 @@ mycopy () {
 }
 
 for name in $(/bin/ls files); do mycopy $name; done
-
 mkdir -p    ${HOME}/.config/myborg
 echo $PWD > ${HOME}/.config/myborg/current.txt
-cat       > ${HOME}/.config/myborg/dothandler << HEREDOC
-echo MYBORG: sourcing ~/.config/myborg/dothandler \$*
-export BORG=\$(cat \${HOME}/.config/myborg/current.txt)
-source \${BORG}/dothandler \$*
-HEREDOC
