@@ -1,7 +1,0 @@
-#!/bin/bash
-#This shebang is for synax only. Do not make executable!
-
-export __DEPTH__=$(( ${__DEPTH__} + 1 ))
-echo ENTERING DEPTH ${__DEPTH__}
-exit () { echo LEAVING DEPTH ${__DEPTH__}; builtin exit 2> /dev/null; }
-
