@@ -10,7 +10,7 @@ echo . ${BORG}/dothandler $*
     source ${BORG}/init
 }
 
-echo . ${BORG}/dotfiles/$*
+echo . \${BORG}/dotfiles/$*
 source ${BORG}/dotfiles/$*
 
 echo ENTER LEVEL $(( ${SHLVL} - 1 ))
