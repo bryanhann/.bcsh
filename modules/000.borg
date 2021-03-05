@@ -3,7 +3,7 @@
 
 _export () { export $1=$2; }
 
-_export BORG_BUILD          ${BORG}/.build
+_export BORG_MYBIN          ${HOME}/.local/var/myborg/mybin
 _export BORG_SCRIPT_INPATH  ${BORG}/notbin/inpath.py
 
-mkdir -p ${BORG_BUILD}
+mkdir -p ${BORG_MYBIN}

@@ -2,7 +2,7 @@
 #This shebang is for synax only. Do not make executable!
 
 main () {
-    local MMP_DST=${BORG_BUILD}/mmp.repo
+    local MMP_DST=${BORG_MYBIN}/mmp.repo
     local MMP_SRC=https://github.com/magicmonty/bash-git-prompt
     [ -d $MMP_DST ] || git clone $MMP_SRC $MMP_DST
     source $MMP_DST/gitprompt.sh
