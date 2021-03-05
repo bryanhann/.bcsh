@@ -2,17 +2,17 @@
 #This shebang is for synax only. Do not make executable!
 
 export BORG=$(cat ~/.local/var/myborg/current.txt)
-
-echo . ${BORG}/dothandler $*
+echo BORG at \[$BORG\] is handling $*
 
 [ -z "$BORG_INIT" ] && {
-    echo . \${BORG}/init
-    source ${BORG}/init
+    export BORG_INIT=true
+    export BORG_INIT_ID=$$
+    export BORG_INIT_DOTFILE=$1
+    export BORG_INIT_ARGS="$*"
+    exit () { echo TRY \'builtin exit\' ; }
+    set | grep ^BORG_INIT
 }
 
-echo . \${BORG}/dotfiles/$*
-source ${BORG}/dotfiles/$*
-
-echo ENTER LEVEL $(( ${SHLVL} - 1 ))
-trap "echo ENTER LEVEL $(( ${SHLVL} - 2 ))" 0
-
+source $BORG/functions
+borg_source ${BORG}/dotfiles/$*
+borg_source ${BORG}/last
