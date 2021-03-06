@@ -6,6 +6,7 @@ borg_export () {
     export $1=$2;
 }
 
+
 #--------------------------------------------------------
 # Initialize ourselves if we have not done so already.
 #--------------------------------------------------------
@@ -59,9 +60,18 @@ borg_modwalk () {
 
 borg_source_module () {
     # source all borg_modwald files under $1
-    echo ! SOURCING FROM $1
+    echo ! SOURCING FROM [$1]
     for module in $(borg_modwalk $1); do
         borg_source $module
     done
 }
 
+#--------------------------------------------------------
+# Consult user config
+#--------------------------------------------------------
+
+[ -f ${HOME}/.config/myborg/activate ] && {
+    borg_source ${HOME}/.config/myborg/activate
+}
+
+set | grep ^MYBORG_CONFIG
