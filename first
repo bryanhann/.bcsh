@@ -6,7 +6,6 @@ borg_export () {
     export $1=$2;
 }
 
-
 #--------------------------------------------------------
 # Initialize ourselves if we have not done so already.
 #--------------------------------------------------------
@@ -40,5 +39,29 @@ borg_addpath () {
         echo '!' PATH+=$1
         export PATH=$PATH:$1
     }
+}
+
+borg_modwalk_all () {
+    # list all paths under $1 whose components start with a digit
+    for name in $(/bin/ls ${1}|grep ^[0-9]|sort); do
+        path=$1/$name
+        echo $path
+        [ -d $path ] && borg_modwalk_all $path
+    done
+}
+
+borg_modwalk () {
+    # like borg_modwalk_all, but only the files.
+    for path in $(borg_modwalk_all $1); do
+        [ -f $path ] && echo $path
+    done
+}
+
+borg_source_module () {
+    # source all borg_modwald files under $1
+    echo ! SOURCING FROM $1
+    for module in $(borg_modwalk $1); do
+        borg_source $module
+    done
 }
 
