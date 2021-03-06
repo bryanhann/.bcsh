@@ -15,6 +15,7 @@ mycopy () {
     true                && echo replacing ${dst} && cp ${src} ${dst} && return
 }
 
+newborg=$(dirname $PWD)
 for name in $(/bin/ls files); do mycopy $name; done
 mkdir -p    ${HOME}/.local/var/myborg
-echo $PWD > ${HOME}/.local/var/myborg/current.txt
+echo ${newborg} > ${HOME}/.local/var/myborg/current.txt

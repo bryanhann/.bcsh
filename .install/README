@@ -1,0 +1,7 @@
+This directory holds information related to installing
+the borg to the system.
+
+The subdirectory 'files' contains the dotfiles that
+will overwrite the user's home dotfiles. The files
+in 'files' lack an initial dot. The installer will
+add the dot.
