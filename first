@@ -1,0 +1,44 @@
+#!/bin/bash
+#This shebang is for synax only. Do not make executable!
+
+borg_export () {
+    echo '!' \${$1} ':=' $2
+    export $1=$2;
+}
+
+
+#--------------------------------------------------------
+# Initialize ourselves if we have not done so already.
+#--------------------------------------------------------
+
+[ -z "$BORG_INIT_ID" ] && {
+    borg_export BORG_INIT_ID        $$
+    borg_export BORG_INIT_DOTFILE   $1
+    borg_export BORG_INIT_ARGS      "$*"
+    borg_export BORG_MYBIN          ${HOME}/.local/var/myborg/mybin
+    borg_export BORG_SCRIPT_INPATH  ${BORG}/.scripts/inpath.py
+    mkdir -p ${BORG_MYBIN}
+    exit () { echo try \'builtin exit\' ; }
+}
+
+#--------------------------------------------------------
+# Define some functions.
+#--------------------------------------------------------
+
+borg_source () {
+    _path () {
+        [ -f /usr/bin/realpath ] \
+        && echo ./$( realpath --relative-to ${BORG} ${1} ) \
+        || echo $1
+    }
+    echo . $(_path $1)
+    . $1
+}
+
+borg_addpath () {
+    ${BORG_SCRIPT_INPATH} $1 || {
+        echo '!' PATH+=$1
+        export PATH=$PATH:$1
+    }
+}
+
