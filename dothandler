@@ -22,7 +22,7 @@
         export BORG_INIT_DOTFILE=$1
         export BORG_INIT_ARGS="$*"
         export BORG_MYBIN=${HOME}/.local/var/myborg/mybin
-        export BORG_SCRIPT_INPATH=${BORG}/notbin/inpath.py
+        export BORG_SCRIPT_INPATH=${BORG}/.scripts/inpath.py
         mkdir -p ${BORG_MYBIN}
         exit () { echo try \'builtin exit\' ; }
     }
