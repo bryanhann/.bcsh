@@ -5,5 +5,5 @@ export BORG=$(cat ~/.local/var/myborg/current.txt)
 
 echo . ${BORG}/handler $*
 source ${BORG}/first
-source ${BORG}/dotfiles/$1
+source ${BORG}/proxies/dot$1
 source ${BORG}/last
