@@ -1,4 +1,4 @@
 [ "$0" == "./install.sh" ] || { echo 'try ./install.sh'; exit; }
-pushd ./.install
+> /dev/null pushd ./.install
 ./install.sh
-popd
+> /dev/null popd
