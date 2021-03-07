@@ -2,7 +2,7 @@
 #This shebang is for synax only. Do not make executable!
 
 export BORG=$(cat ~/.local/var/myborg/current.txt)
-export PATH=${PATH}:${BORG}/lbin
+export PATH=${PATH}:${BORG}/bin
 
 echo [${BORG}/dothandler] $*
 
