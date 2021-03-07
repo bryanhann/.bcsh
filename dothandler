@@ -2,8 +2,14 @@
 #This shebang is for synax only. Do not make executable!
 
 export BORG=$(cat ~/.local/var/myborg/current.txt)
+export PATH=${PATH}:${BORG}/lbin
 
-echo . ${BORG}/handler $*
-source ${BORG}/first
-source ${BORG}/proxies/dot$1
-source ${BORG}/last
+echo [${BORG}/dothandler] $*
+
+source borg:source:file ${HOME}/.config/myborg/activate
+
+source borg:source:file ${BORG}/first
+source borg:source:file ${BORG}/proxies/dot$1
+source borg:source:file ${BORG}/last
+
+source borg:path:clean

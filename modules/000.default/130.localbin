@@ -1,4 +1,4 @@
 #!/bin/bash
 #This shebang is for synax only. Do not make executable!
 
-borg_addpath ${HOME}/.local/bin
+source borg:path:add ${HOME}/.local/bin
