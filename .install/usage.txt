@@ -1,0 +1,8 @@
+USAGE:
+    ./install.sh install [-y] [-v]
+
+    Install this borg.
+
+OPTIONS:
+    -v  overwrite [${vard}]
+    -y  assume 'yes' at prompts

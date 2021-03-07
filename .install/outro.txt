@@ -1,0 +1,4 @@
+    +----------------------------------------------------+
+    |  Your shell may now be wonky. Your next shell      |
+    |  will be fine. Press enter to continue.            |
+    +----------------------------------------------------+

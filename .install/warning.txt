@@ -1,0 +1,5 @@
+    +----------------------------------------------------+
+    |  Directory [~/.local/var/myborg] will be removed.  |
+    |  To continue, press enter three times.  To abort,  |
+    |  press CTRL-C.                                     |
+    -----------------------------------------------------+
