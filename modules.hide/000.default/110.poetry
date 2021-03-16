@@ -1,6 +1,0 @@
-#!/bin/bash
-#This shebang is for synax only. Do not make executable!
-
-export POETRY_HOME=${BORG_MYBIN}/poetry
-source borg:path:add ${POETRY_HOME}/bin
-[ -d ${POETRY_HOME} ] || curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python - --no-modify-path

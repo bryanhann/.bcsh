@@ -5,11 +5,7 @@ export BORG=$(cat ~/.local/var/myborg/current.txt)
 export PATH=${PATH}:${BORG}/bin
 
 echo [${BORG}/dothandler] $*
-
-source borg:source:file ${HOME}/.config/myborg/activate
-
-source borg:source:file ${BORG}/first
-source borg:source:file ${BORG}/proxies/dot$1
-source borg:source:file ${BORG}/last
-
+source borg:__first__
+source borg:insitu-source ${HOME}/.config/myborg/dothandler $*
+source borg:__last__
 source borg:path:clean
