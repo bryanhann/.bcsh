@@ -1,0 +1,84 @@
+#!/bin/bash
+#This shebang is for synax only. Do not make executable!
+
+__myborg_ind () {
+    [ "$(__myborg_depth)" = "0" ] && return
+    for ii in $(seq $(__myborg_depth)); do
+          printf "|    "
+    done;
+}
+__myborg_depth() { echo ${_MBD_-0}; }
+__myborg_inc()   { export _MBD_=$(( $(__myborg_depth) + 1 )); }
+__myborg_dec()   { export _MBD_=$(( $(__myborg_depth) - 1 )); }
+__myborg_scr()   { [ -f ~/.myborg.flag.verbose ] && return 0 || return 1; }
+__myborg_flog()  { echo $(__myborg_depth) $* >> ~/.myborg.log ; }
+__myborg_log()   { __myborg_flog $*   ; __myborg_slog $*; }
+__myborg_slog()  { __myborg_scr   && __myborg_ind && echo $* ; }
+__myborg_enter() { __myborg_log ++$*  ; __myborg_inc;  }
+__myborg_exit()  { __myborg_dec;             }
+__myborg_insitu(){ __myborg_pushd && { shift; $*; __myborg_popd; }; }
+__myborg_pushd() { > /dev/null 2> /dev/null pushd $1; }
+__myborg_popd()  { > /dev/null 2> /dev/null popd $1; }
+myborg () {
+     local fn=myborg_$1
+     shift
+     __myborg_enter $fn $*
+     $fn $*
+     __myborg_exit $fn $*
+   }
+
+myborg_load() {
+    __myborg_pushd $1
+    shift
+    myborg source ./insitu
+    __myborg_popd
+}
+
+myborg_export () { key=$1; shift; export $key="$*"; }
+myborg_insitu_source () { myborg insitu $(dirname $1) myborg source $*; }
+myborg_source () { source ${1}; }
+
+_myborg_insitu () {
+    [ -d "$1" ] && echo yes || echo no
+}
+myborg_insitu () {
+    __myborg_insitu $*
+    return
+    [   -z "$1" ] && return
+    [ ! -d "$1" ] && return
+    > /dev/null pushd $1 || return
+    shift
+    $*
+    > /dev/null popd
+}
+
+myborg_clone () { 
+    local D=${MYBORG_MODS}/${1}
+    [ ! -d ${D} ] && shift && git clone $* ${D}
+}
+
+
+myborg_source_all () {
+    for name in $(ls ${MYBORG_MODS}); do
+        myborg load ${MYBORG_MODS}/${name}
+        #myborg insitu_source ${MYBORG_MODS}/${name}/insitu
+
+    done
+}
+
+myborg_main () {
+    myborg_export PATH ${PATH}:${MYBORG_MODS}/borg/bin
+    myborg insitu_source ${MYBORG_MODS}/100.bch/insitu
+    myborg insitu_source ${MYBORG_MODS}/900.bch/insitu
+    source borg:__first__
+    myborg source ${MYBORG_DOTFILES}/dot$1
+    source borg:__last__
+    source borg:path:clean
+}
+
+
+
+myborg_clone_all () { source ${MYBORG}/index ; }
+
+
+
