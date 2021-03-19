@@ -1,0 +1,4 @@
+export PATH=${PATH}:${PWD}/bin
+echo before: PATH=[$PATH]
+source borg:path:clean
+echo after: PATH=[$PATH]
