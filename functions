@@ -4,7 +4,7 @@
 __myborg_ind () {
     [ "$(__myborg_depth)" = "0" ] && return
     for ii in $(seq $(__myborg_depth)); do
-          printf "|    "
+          printf "|  "
     done;
 }
 __myborg_depth() { echo ${_MBD_-0}; }
@@ -14,8 +14,16 @@ __myborg_scr()   { [ -f ~/.myborg.flag.verbose ] && return 0 || return 1; }
 __myborg_flog()  { echo $(__myborg_depth) $* >> ~/.myborg.log ; }
 __myborg_log()   { __myborg_flog $*   ; __myborg_slog $*; }
 __myborg_slog()  { __myborg_scr   && __myborg_ind && echo $* ; }
-__myborg_enter() { __myborg_log ++$*  ; __myborg_inc;  }
-__myborg_exit()  { __myborg_dec;             }
+__myborg_enter() { 
+    local head="[$1]"
+    shift
+    __myborg_log $head $*
+    __myborg_inc;
+}
+__myborg_exit()  { 
+  __myborg_dec
+  #__myborg_log '\-------------------------------------------------'
+}
 __myborg_insitu(){ __myborg_pushd && { shift; $*; __myborg_popd; }; }
 __myborg_pushd() { > /dev/null 2> /dev/null pushd $1; }
 __myborg_popd()  { > /dev/null 2> /dev/null popd $1; }
