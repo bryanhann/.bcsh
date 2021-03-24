@@ -37,7 +37,8 @@ myborg () {
 myborg_load() {
     __myborg_pushd $1
     shift
-    myborg source ./insitu
+    [ -f ./insitu ] && myborg source ./insitu
+    [ -f ./insitu.d/insitu ] && myborg source ./insitu.d/insitu
     __myborg_popd
 }
 
