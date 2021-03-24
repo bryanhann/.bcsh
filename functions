@@ -34,21 +34,39 @@ myborg () {
      __myborg_exit $fn $*
    }
 
-__warn_deprecation () {
-cat <<__DEPWARNING__
+
+myborg_load() {
+
+__deprecation_warning__ () {
+cat <<__WARNING__
 #######################################################################
 #  WARNING: In [${PWD}/]:
 #      Use of [./insitu] is deprecated. 
 #      Use [./insitu.d/insitu] instead.
 #######################################################################
-__DEPWARNING__
+__WARNING__
 }
-
-myborg_load() {
+    # Push into the module root for insitu loading.
     __myborg_pushd $1
+
+    # this shift is purposless unless we pass args to insitu.
     shift
-    [ -f ./insitu ] && __warn_deprecation && myborg source ./insitu
-    [ -f ./insitu.d/insitu ] && myborg source ./insitu.d/insitu
+
+    # Use of [<MOD>/insitu] for loading is DEPRECATED. We continue to use
+    # such files for now, but we warn the user.
+
+    [ -f ./insitu ] && {
+        myborg source ./insitu
+        __deprecation_warning__
+    }
+
+    # Use of [<MOD>/insitu.d/insitu] is the preferred way.
+
+    [ -f ./insitu.d/insitu ] && {
+          myborg source ./insitu.d/insitu
+    }
+
+    # Pop back out when done.
     __myborg_popd
 }
 
