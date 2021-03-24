@@ -34,10 +34,20 @@ myborg () {
      __myborg_exit $fn $*
    }
 
+__warn_deprecation () {
+cat <<__DEPWARNING__
+#######################################################################
+#  WARNING: In [${PWD}/]:
+#      Use of [./insitu] is deprecated. 
+#      Use [./insitu.d/insitu] instead.
+#######################################################################
+__DEPWARNING__
+}
+
 myborg_load() {
     __myborg_pushd $1
     shift
-    [ -f ./insitu ] && myborg source ./insitu
+    [ -f ./insitu ] && __warn_deprecation && myborg source ./insitu
     [ -f ./insitu.d/insitu ] && myborg source ./insitu.d/insitu
     __myborg_popd
 }
