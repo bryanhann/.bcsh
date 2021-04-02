@@ -1,0 +1,5 @@
+export PATH=${PATH}:${PWD}/bin
+echo }} source ./functions
+        source ./functions
+echo }} source borg:path:clean
+        source borg:path:clean
